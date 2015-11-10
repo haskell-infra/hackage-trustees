@@ -46,7 +46,6 @@ This is a quick reference for adding bounds for common errors.
 ```
 base upper bounds:
 Illegal bang-pattern (use -XBangP..)        => base < 4.4
-Prelude.foldr                               => base < 4.5
 Prelude.catch                               => base < 4.6
 
 base lower bounds:
