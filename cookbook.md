@@ -41,7 +41,7 @@ never pick this version.
 Several different errors: Missing modules or identifiers, name clashes.
 This is a quick reference for adding bounds for common errors.
 
-**Fix:** If the identifier is missing add the constraint on the RHS.
+**Fix:** If the identifier is missing/clashes add the constraint on the RHS.
 
 ```
 base upper bounds:
@@ -72,6 +72,8 @@ Scientific vs Number                        => aeson < 0.7
 Control.Monad.Trans.Resource & conduit      => conduit < 0.3
 
 MonadThrow.monadThrow doesn't exist         => exceptions < 0.4, resourcet < 1.1
+
+Data.Serialize.Builder                      => cereal < 0.5
 
 crypto packages:
 Crypto.Cipher.AES & depends on cryptocipher => cryptocipher < 0.5
