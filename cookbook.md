@@ -38,6 +38,25 @@ never pick this version.
 
 **Problem:**
 
+```
+Control/Concurrent/Chan/Strict.hs:59:10:
+    No instances for (ghc-prim:GHC.Generics.Generic (MVar a),
+                      Control.DeepSeq.GNFData (ghc-prim:GHC.Generics.Rep (MVar a)))
+      arising from a use of `Control.DeepSeq.$gdmrnf'
+    Possible fix:
+      add instance declarations for
+      (ghc-prim:GHC.Generics.Generic (MVar a),
+       Control.DeepSeq.GNFData (ghc-prim:GHC.Generics.Rep (MVar a)))
+```
+
+**Fix:** Add a `deepseq < 1.4` constraint
+
+**Explanation:** This often causes build failures only on `GHC < 7.2` since `GHC < 7.4` doesn't come with a boot version of `deepseq`. GHC 7.4-7.8 will usually pick the boot version (`deepseq 1.3.*`).
+
+----
+
+**Problem:**
+
 Several different errors: Missing modules or identifiers, name clashes.
 This is a quick reference for adding bounds for common errors.
 
