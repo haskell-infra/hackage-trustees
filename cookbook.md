@@ -38,6 +38,22 @@ never pick this version.
 
 **Problem:**
 
+```
+Ambiguous occurrence ‘defaultTimeLocale’
+It could refer to either ‘System.Locale.defaultTimeLocale’, imported from ‘System.Locale’
+or ‘Data.Time.defaultTimeLocale’, imported from  ‘Data.Time(.Format.Locale)’
+```
+
+**Metadata fix:** Add a `time < 1.5` constraint.
+
+**Source fix:** Import `defaultTimeLocale` from `time-locale-compat:Data.Time.Locale.Compat`
+
+**Explanation:** `time-1.5` added `defaultTimeLocale` obsoleting `old-locale`.
+
+---
+
+**Problem:**
+
 Several different errors: Missing modules or identifiers, name clashes.
 This is a quick reference for adding bounds for common errors.
 
