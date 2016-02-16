@@ -1,5 +1,5 @@
-Draft Hackage trustee policy and procedures
-===========================================
+Hackage trustee policy and procedures
+=====================================
 
 The Hackage trustees are a group of volunteers who are interested in
 the health of the package collection as a whole. This is different to
@@ -52,13 +52,9 @@ Policy/Procedure
 ----------------
 
 * trustees can edit .cabal file to constrain dependencies
-* maintainers are automatically notified
-* opening tickets and sending pull requests is not required
-
-The trustees do not propose a maintainer opt-out for this case but are
-willing to reconsider if there are strong objections.
-
-
+* maintainers should be notified via e-mail, by filing a bug tracker issue, or
+  by sending pull request (in the future this step may be automated by hackage)
+ 
 2. Metadata-only changes: relaxing constraints
 ==============================================
 
@@ -66,20 +62,22 @@ The trustees' view is that relaxing constraints should be done
 carefully, and ideally done by or checked by the package maintainers.
 Nevertheless there are cases where it is helpful.
 
-The trustees propose to default to opted-in for this case,
-with the possibility to opt-out.
-
 Policy/Procedure
 ----------------
 
-* maintainers can explicitly indicate whether trustees are able to relax
-  constraints for their package
-* if so, trustees can edit .cabal file to relax deps and maintainers
-  will be automatically notified
-* if not, trustee's proposed edits are sent to the maintainers but not
-  applied
+* trustees can edit .cabal file to relax dependencies
+
+* maintainers should be notified via e-mail, by filing a bug tracker
+  issue, or by sending a pull request (in the future this step may be
+  automated by hackage)
+
 * the default is to be opted in to allowing trustees to make these edits
-* opening tickets and sending pull requests is not required
+
+* (in the future) maintainers should be able to explicitly indicate
+  whether trustees are able to relax constraints for their package
+  
+* (in the future) if not, trustee's proposed edits are sent to the
+  maintainers but not applied
 
 Trustees are expected to use this power judiciously and make sure they
 understand the packages involved and their APIs. In the first instance
@@ -162,6 +160,7 @@ Policy/Procedure
 The policy for this is already established, but the trustees can help
 facilitate it, e.g. by acting as a point of contact for the procedure.
 
+This is detailed on the [haskell wiki](https://wiki.haskell.org/Taking_over_a_package).
 
 Anticipated Hackage enhancements for automation
 ===============================================
@@ -174,15 +173,3 @@ maintainer group. Ideally this should include:
 * a patch attachment or link to a patch in a suitable format (e.g.
   git patch format)
 * instructions for applying the patch (e.g. git commands)
-
-
-Other anticipated infrastructure
-===============================
-
-In addition to an issue tracker on github, the trustees will need to be able
-to manage temporary (or not so temporary) forks of various packages that they
-do NMUs for.
-
-Probably we need a github organisation for this, so we can have
-all the forked repos the trustees have forked visible and accessible to the
-trustees (and easily discoverable by other users).
