@@ -122,8 +122,9 @@ Policy/Procedure
  1. (Anyone) Send a pull request or open an issue to the offending
     packages source repository. If no source repository is
     available, send an e-mail.
- 2. (Anyone) After a while if there is no response, open a ticket in
-    the trustees issue tracker, linking to the pull request / issue,
+ 2. (Anyone) After a while if there is no response, [open a ticket in
+    the trustees issue tracker](https://github.com/haskell-infra/hackage-trustees/issues/new),
+    linking to the pull request / issue,
     or describing/embedding the e-mail. Alternatively if problems
     are anticipated from the outset then file the issue immediately.
  3. (Trustee) When the issue is opened, a trustee must try to
