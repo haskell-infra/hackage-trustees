@@ -52,6 +52,22 @@ or ‘Data.Time.defaultTimeLocale’, imported from  ‘Data.Time(.Format.Locale
 
 ---
 
+**Problem**
+
+```
+Could not deduce (Eq a) arising from a use of ‘==’ from the context: Num a
+```
+
+```
+Could not deduce (Show a) arising from a use of ‘show’ from the context: Num a
+```
+
+**Metadata fix:** Add a `base < 4.5` constraint.
+
+**Explaination:** `Num` lost its Haskell2010-compliant `Eq`/`Show` superclasses in `base-4.5`
+
+---
+
 **Problem:**
 
 Several different errors: Missing modules or identifiers, name clashes.
