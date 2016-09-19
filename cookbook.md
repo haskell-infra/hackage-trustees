@@ -68,6 +68,22 @@ Could not deduce (Show a) arising from a use of ‘show’ from the context: Num
 
 ---
 
+**Problem**
+
+```
+    Ambiguous occurrence `catch'
+    It could refer to either `Prelude.catch',
+                             imported from `Prelude' at Network/HTTP/Client/TLS.hs:4:8-30
+                             (and originally defined in `System.IO.Error')
+                          or `Control.Exception.catch',
+```
+
+**Metadata fix:** Add a `base >=4.6` constraint.
+
+**Explaination:** `catch` was removed from `Prelude` in `base-4.6`
+
+---
+
 **Problem:**
 
 Several different errors: Missing modules or identifiers, name clashes.
