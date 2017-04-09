@@ -80,7 +80,7 @@ Could not deduce (Show a) arising from a use of ‘show’ from the context: Num
 
 **Metadata fix:** Add a `base >=4.6` constraint.
 
-**Explaination:** `catch` was removed from `Prelude` in `base-4.6`
+**Explanation:** `catch` was removed from `Prelude` in `base-4.6`
 
 ---
 
