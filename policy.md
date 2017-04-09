@@ -1,5 +1,4 @@
-Hackage trustee policy and procedures
-=====================================
+# Hackage trustee policy and procedures
 
 The Hackage trustees are a group of volunteers who are interested in
 the health of the package collection as a whole. This is different to
@@ -20,8 +19,7 @@ but closer to upstream, and more centralised rather than duplicated
 across numerous Linux distributions.
 
 
-Mission statement
------------------
+## Mission statement
 
 The goal is to maximise the useful improvements trustees can make (or
 encourage others to make) to the collection while making sure the
@@ -31,8 +29,7 @@ trustees to make useful improvements, with the legitimate concerns of
 authors/maintainers to maintain control and quality.
 
 
-1. Metadata-only changes: tightening constraints
-================================================
+## 1. Metadata-only changes: tightening constraints
 
 The trustees' view is that tightening constraints is very useful,
 and is pretty safe and obvious. It is safe in the sense that it
@@ -48,22 +45,19 @@ correctable.)
 Making these changes is also likely to be the bulk of the trustees'
 work and so the trustees want a process with low overheads.
 
-Policy/Procedure
-----------------
+### Policy/Procedure
 
 * trustees can edit .cabal file to constrain dependencies
 * maintainers should be notified via e-mail, by filing a bug tracker issue, or
   by sending pull request (in the future this step may be automated by hackage)
  
-2. Metadata-only changes: relaxing constraints
-==============================================
+## 2. Metadata-only changes: relaxing constraints
 
 The trustees' view is that relaxing constraints should be done
 carefully, and ideally done by or checked by the package maintainers.
 Nevertheless there are cases where it is helpful.
 
-Policy/Procedure
-----------------
+### Policy/Procedure
 
 * trustees can edit .cabal file to relax dependencies
 
@@ -86,8 +80,7 @@ available then they should use their judgement and consult with each
 other when in doubt.
 
 
-3. Source changes: "simple" patches
-===================================
+## 3. Source changes: "simple" patches
 
 There are cases where maintainers are unavailable indefinitely or for
 long periods. This is not usually an urgent problem, but sometimes when
@@ -116,8 +109,7 @@ a careful procedure is called for. It should balance the benefits to
 the health of the package collection with the control of package
 author.
 
-Policy/Procedure
-----------------
+### Policy/Procedure
 
  1. (Anyone) Send a pull request or open an issue to the offending
     packages source repository. If no source repository is
@@ -155,16 +147,14 @@ Policy/Procedure
     can see the changes that have been made (ie the forked repo and
     the ticket tracking the issue).
 
-4. Full transfer of ownership
-=============================
+## 4. Full transfer of ownership
 
 The policy for this is already established, but the trustees can help
 facilitate it, e.g. by acting as a point of contact for the procedure.
 
 This is detailed on the [haskell wiki](https://wiki.haskell.org/Taking_over_a_package).
 
-Anticipated Hackage enhancements for automation
-===============================================
+## Anticipated Hackage enhancements for automation
 
 Edits to .cabal metadata should be emailed to the members of the
 maintainer group. Ideally this should include:
