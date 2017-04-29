@@ -1,8 +1,10 @@
 # Cookbook for common build-failures
 
-This document gives recipes for addressing common compile errors
+This document gives recipes for addressing common compile errors and
+other meta-data issues, as well as best practices for performing
+meta-data revisions.
 
-----
+## Compile errors/symptoms and their solutions
 
 **Problem:**
 
@@ -131,3 +133,151 @@ Crypto.Modes.IV                             => crypto-api < 0.11
 Crypto.Random.AESCtr.genRandomBytes         => cprng-aes < 0.5
 Couldn't match `Int' with `AESRNG'          => cprng-aes < 0.3
 ```
+
+## Best practice for managing meta-data
+
+Below, multiple common schemes used to ensure accurate dependency
+meta-data are described, together their respective trade-offs and
+associated costs.
+
+The architecture of the Hackage/Cabal ecosystem make it necessary to
+optimise the way meta-data is managed in order to keep the overall
+system sustainable.  Specifically, the meta-data management protocols
+needs to ensure that the amount of meta-data updates are minimised and
+that the configuration space is kept reasonably compact.
+
+In general, new package releases ought to be avoided when a meta-data
+would suffice.
+
+In the descriptions below, the term *active releases* is to denote
+releases which are deemed the most recent ones and are considered
+actively supported (this is usually only one: the most recent
+version).
+
+### The *correct* way
+
+ - Upload releases with proper [PVP](http://pvp.haskell.org)-style version bounds
+ - Relax version bounds for *active releases* via revisions as needed
+
+*Static cost: 1 meta-data revision per compatible-dependency-upgrade-event*
+
+It has the benefit of reducing the overall risk of compile failures or
+compilable unsound configurations to a minimum. And by the more
+conservative approach to opt-in to extend the solution space rather
+than opt-out of incorrect parts of the solution space, don't put as
+much pressure on the maintainer to step in.
+
+Moreover, this keeps the configuration space small which is beneficial
+for the cabal solver as it allows it to operate more efficiently and
+discard less interesting parts of the space sooner. This typically
+results in a configuration space which gets larger towards newer
+versions.
+
+If a package has frequent releases (in relation to its dependencies),
+this scheme is very economical versions can often be relaxed as part
+of a new release.
+
+From the correctness point of view as well as the overall cost, this
+represents the optimal scheme. This results in packages that from
+experience cause the least problems on Hackage, and therefore the
+least amount of work from all parties involved.
+
+Moreover, this can be complemented with automated systems (such as
+Stackage or via `packdeps` + Travis CI) which can notify package
+authors when new package releases of dependencies become available
+which happen to be out of bounds.
+
+Because __this scheme is the overall optimal one__, this is also the
+only scheme that's actually in full compliance with the stated Hackage
+guidelines.
+
+### The *lagging* way
+
+ - Upload new releases without upper bounds (assuming they're compatible w/ most recent depending package versions on Hackage), and...
+ - ... add upper bounds to previous releases that have become non-*active* by the new release
+ - When unsound/bad install-plans are detected, add upper bounds ASAP
+
+*Static cost: 1 meta-data revision per release __plus__ 1 meta-data revision per incompatible-dependency-upgrade-event*
+
+In this scheme, only *active* releases can have upper bounds omitted.
+
+The problem with this scheme is that there is a constant risk that a
+new major release of a dependency allowed by the lack of an upper
+bound may result in an unsound configuration. However, since it's not
+possible to instantly revalidate each depending package when a new
+major release of a dependency occurs, this introduces a dangerous
+"lag" between Hackage's meta-data regressing into an unsound
+state and recovering again.
+
+This "lag" is made up of the time from when the breaking dependency
+gets uploaded to the time when the unsoundness is detected plus the
+time needed for a maintainer stepping in and recovering correctness by
+adding the necessary upper bound.
+
+This scheme results in the same meta-data during "sound" phases as the
+"correct" way described in the previous section; however, this scheme
+has scalability issues as the more Hackage grows, the more likelihood
+of at one or more packages becoming unsound increases as well. If this
+increases too much, a point would be reached at which there is always
+multiple unsound packages.
+
+Another problem with this scheme is that by the time the problem has
+been detected, install-plans using unsound configurations (which
+happen to compile) may have started to become used by users (and which
+may not even exhibit the incorrectness as they may not use the broken
+codepaths). If such install-plans are retroactively prohibited, this
+results in a bad user-experience, and results in violation of the
+invariant that a meta-data revision shall not result in existing
+install-plans becoming illegal.
+
+So this scheme is very sensitive to being able to detect & resolve
+meta-data regressions in a *very* timely matter, as otherwise the
+overall system collapses due to a build-up of not-yet-fixed unsound
+meta-data.
+
+### The *sloppy* way
+
+ - Upload new releases without (upper) bounds (-"-)
+ - When unsound/bad install-plans are detected,
+    - add (all) upper bounds to all affected releases
+
+*Static cost: 1 meta-data revision per release.*
+
+This is similiar to the *lagging* way, typically increases the
+risk-exposure to more releases than just the next-to-last one, and
+thereby also misses the goal to keep the configuration space
+reasonably (and therefore results in a different meta-data situation
+than the other workflows!) compact to aid constraint solving.
+
+Due to the increased configuration space, the combinatorics involved
+make it even more prohibitive than the *laggy* scheme (if not
+impossible) to cover validating new install-plans becoming possible
+due to the appearance of new major versions.
+
+The revision-cost is actually lower than for the *lagging* scheme; for
+packages with a small number of total releases combined with a high
+amount of direct frequently releasing dependencies, this scheme may
+also result in a smaller static cost. However, the aforesaid mentioned
+disadvantages make this scheme still less preferable to the *correct*
+and *lagging* schemes.
+
+### The *worst* way
+
+ - Upload new releases without (upper) bounds (-"-)
+ - When unsound/bad install-plans are detected,
+    - add the minimal amount of necessary upper bounds to all affected releases
+
+*Static cost: 1 meta-data revision per incompatible-dependency-upgrade-event __times__ number of affected releases*
+
+This has by far the worst overall cost-model of all schemes listed
+here and asymptotically leads
+to the very harmful situation where the number of meta-data revisions
+will eventually outnumber the amount of actual package releases by
+orders of magnitudes, while also amplifying the downsides already
+described for the *laggy* and *sloppy* schemes, and last but not least
+also being the most laborious workflow for both maintainers and
+trustees.
+
+In short, __this scheme is maximally detrimental to the Hackage/Cabal ecosystem__
+and therefore ought to be avoided at any price as it isn't sustainable
+due to the prohibitive computational complexities involved.
