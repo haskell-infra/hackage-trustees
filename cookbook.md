@@ -146,9 +146,11 @@ system sustainable.  Specifically, the meta-data management protocols
 needs to ensure that the amount of meta-data updates are minimised and
 that the configuration space is kept reasonably compact.
 
-In general, new package releases ought to be avoided when a meta-data
-would suffice.
+A couple of general guiding principles are:
 
+ - New package releases ought to be avoided when a meta-data revision would suffice
+ - New releases or meta-data updates *for the sole purpose* of relaxing dependencies in test-suites and/or benchmark suites ought to be avoided. Such meta-data updates shall be saved up for the next release or the next "useful" revision.
+ 
 In the descriptions below, the term *active releases* is to denote
 releases which are deemed the most recent ones and are considered
 actively supported (this is usually only one: the most recent
