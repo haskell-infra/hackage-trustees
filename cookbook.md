@@ -86,6 +86,22 @@ Could not deduce (Show a) arising from a use of ‘show’ from the context: Num
 
 ---
 
+**Problem**
+
+The `.cabal` file contains disabled components (i.e. via `buildable:False`) and the build fails with
+
+```
+Configuring foo-1.2.3...
+setup: At least the following dependencies are missing:
+process -any, temporary >=1.1
+```
+
+**Metadata fix:** If missing, add a `custom-setup` stanza and set a lower bound `setup-depends: Cabal >= 1.24`.
+
+**Explanation:** See [Cabal #3881](https://github.com/haskell/cabal/issues/3881)
+
+---
+
 **Problem:**
 
 Several different errors: Missing modules or identifiers, name clashes.
