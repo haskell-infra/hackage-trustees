@@ -22,6 +22,12 @@ Packages with revisions will tell you so on their cabal page. You can always acc
 
 `cabal get --pristine`
 
+## How can I operate without taking into account revisions?
+
+If you produced something at a particular point in time and want to pin it down so that no future revisions can alter anything about it, you can specify the `index-state` parameter (either in a configuration file or on the command line) as documented here: http://cabal.readthedocs.io/en/latest/nix-local-build.html?highlight=index-state#cfg-field-index-state
+
+This pins down the view of the package universe to use revisions as of any particular timestamp and so allows you to `cabal freeze` not only versions, but the exact revisions of them.
+
 ## How are revisions numbered?
 
 Revisions are numbered by natural numbers, starting at zero, and increase in increments of 1.
