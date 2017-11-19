@@ -12,7 +12,7 @@ Revisions can also be used when a package homepage or maintainer or the like cha
 
 ## Why not just keep uploading new versions?
 
-First, uploading a whole bunch of code when only metadata changes leads to an unnecessary growth in versions. Second, often revisions need to be applied not only to the most recent version of a package, but prior versions as well. In particular, if a package at a given version has a bad install plan, then you do not want to let some tool continue to think this is a good plan, even if that package is not the latest version,.
+First, uploading a whole bunch of code when only metadata changes leads to an unnecessary growth in versions. Second, often revisions need to be applied not only to the most recent version of a package, but prior versions as well. In particular, if a package at a given version has a bad install plan, then you do not want to let some tool continue to think this is a good plan, even if that package is not the latest version.
 
 ## Where can I see revisions?
 
@@ -28,7 +28,7 @@ Revisions are numbered by natural numbers, starting at zero, and increase in inc
 
 ## What can revisions change?
 
-Revisions are intended to only update metadata used by build tooling, or that is used purely for display purposes. The source of a package is never changed, only specified fields of cabal files. Given the same fixed dependencies and flag configuration, as long as a metadata change hasn't disallowed them, the build product from a compiler should be the same regardless of revision changes.
+Revisions are intended to only update metadata used by build tooling, or that is used purely for display purposes. The source code of a package is never changed, only specified fields of cabal files. Given the same fixed dependencies and flag configuration, as long as a metadata change hasn't disallowed them, the build product from a compiler in the same environment is intended to be the same regardless of revision changes. Put another way, it is intended revisions do not alter the semantic meaning of the version assigned to a package. 
 
 Specifically, revisions can alter the following:
 
@@ -50,10 +50,9 @@ Specifically, revisions can alter the following:
 * Package description
 * Package category
 
-Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while older versions simply shared dependencies with the package proper.
+Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while older versions simply shared exposed to `Setup.hs` whatever happened to be registered in the user pkg db, which was fragile and created a situation with untracked dependencies (cf: https://www.well-typed.com/blog/2015/07/cabal-setup-deps/)
 
-Other exceptions for adding dependencies all fall in the camp of needing to add things which had been implicitly assumed in the past, from a small whitelist. Package dependencies which may be added are "base" and "base-orphans". Build tool dependencies which may be added are "alex", "c2hs", "cpphs", "greencard", "happy" and "hsc2hs".
-
+Other exceptions for adding dependencies all fall in the camp of needing to add things which had been implicitly assumed in the past, from a small whitelist. Package dependencies which may be added are "base" and "base-orphans". Build tool dependencies which may be added are "alex", "c2hs", "cpphs", "greencard", "happy" and "hsc2hs". This can be seen as improving compatibility with newer cabal library versions which require that past implicit assumptions be made more explicit (cf: https://www.well-typed.com/blog/2015/03/qualified-goals/).
 
 ## What can't revisions change?
 
@@ -69,6 +68,10 @@ Revisions can't change anything else. In particular, they cannot alter code, and
 * Flags (adding or removing)
 * library, sub-library, executable, test-suite, or foreign-library stanzas (adding or removing)
 
+## Will these rules for what can and can't be revised ever change?
+
+It is expected that the overriding goal that revisions do not alter the semantic meaning of the version assigned to a package should always hold. However, it is possible that specific allowances may be made for particular other things to be changed by revisions, in order to keep things building under new cabal library versions. However, as cabal has increasingly made more dependencies explicit (and particular enabled the tracking of cabal specification versioning information itself), then it is hoped that this will occur less frequently going forward, and it is hoped that it should not occur at all. Additionally, as new stanzas and features are added to cabal files over time, their interactions with revisions will also need to be specified.
+
 ## Why can't I revise licenses?
 
-Because once code is released under a license, it remains under that license
+Because once code is released under a license, it remains under that license. Additionally a `LICENSE` file is included in the tarball, and revisions can only alter cabal metadata, so the file itself would remain, regardless.
