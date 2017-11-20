@@ -22,7 +22,7 @@ Packages with revisions will tell you so on their cabal page. You can always acc
 
 `cabal get --pristine`
 
-## How can I operate without taking into account revisions?
+## How can I fix dependencies in the face of potential future revisions?
 
 If you produced something at a particular point in time and want to pin it down so that no future revisions can alter anything about it, you can specify the `index-state` parameter (either in a configuration file or on the command line) as documented here: http://cabal.readthedocs.io/en/latest/nix-local-build.html?highlight=index-state#cfg-field-index-state
 
@@ -30,7 +30,7 @@ This pins down the view of the package universe to use revisions as of any parti
 
 ## How are revisions numbered?
 
-Revisions are numbered by natural numbers, starting at zero, and increase in increments of 1.
+The initial upload of a package has the implicit revision zero. Every successive revision increments that by one. 
 
 ## What can revisions change?
 
@@ -56,7 +56,7 @@ Specifically, revisions can alter the following:
 * Package description
 * Package category
 
-Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while older versions simply shared exposed to `Setup.hs` whatever happened to be registered in the user pkg db, which was fragile and created a situation with untracked dependencies (cf: https://www.well-typed.com/blog/2015/07/cabal-setup-deps/)
+Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while in older versions `Setup.hs` had access to whatever happened to be registered in the user pkg db. This was fragile and created a situation with untracked dependencies (cf: https://www.well-typed.com/blog/2015/07/cabal-setup-deps/)
 
 Other exceptions for adding dependencies all fall in the camp of needing to add things which had been implicitly assumed in the past, from a small whitelist. Package dependencies which may be added are "base" and "base-orphans". Build tool dependencies which may be added are "alex", "c2hs", "cpphs", "greencard", "happy" and "hsc2hs". This can be seen as improving compatibility with newer cabal library versions which require that past implicit assumptions be made more explicit (cf: https://www.well-typed.com/blog/2015/03/qualified-goals/).
 
