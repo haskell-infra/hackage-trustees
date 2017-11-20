@@ -81,3 +81,7 @@ It is expected that the overriding goal that revisions do not alter the semantic
 ## Why can't I revise licenses?
 
 Because once code is released under a license, it remains under that license. Additionally a `LICENSE` file is included in the tarball, and revisions can only alter cabal metadata, so the file itself would remain, regardless.
+
+## When will Hackage Trustees make revisions?
+
+In general, it is better if authors make revisions themselves to packages. Trustees are expected to step in to help out when maintainers aren't proactive about these changes, or otherwise when they can offer particular help with regards to improving the health of the package collection as a whole, and they are expected to do so in a way which fosters a good relationship between authors/maintainers and trustees. More specific details are provided in the "metadata-only" sections of the trustee policies: https://github.com/haskell-infra/hackage-trustees/blob/master/policy.md
