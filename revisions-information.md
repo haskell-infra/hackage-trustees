@@ -1,4 +1,4 @@
-# Hackage Metadata Revisions -- What They Are, How They Work
+# Hackage Metadata Revisions — What They Are, How They Work
 
 ## What are revisions?
 
