@@ -2,11 +2,11 @@
 
 ## What are revisions?
 
-Package maintainers (as well as Hackage trustees) may provide metadata-revisions to existing package versions. These revisions can be thought of as "updating" the cabal file of a package with new or more current information. However, they do not _actually_ update the file. Tarballs retrieved from hackage are always as the authors uploaded them. Revision information is tracked explicitly in the Hackage index, and `cabal-install` will chose to prefer the latest revision of a cabal file to the original one when downloading or installing a package.
+Package maintainers (as well as Hackage trustees) may provide metadata-revisions to existing package versions. These revisions can be thought of as "updating" the cabal file of a package with new or more current information. However, they do not _actually_ update the file. Tarballs retrieved from Hackage are always as the authors uploaded them. Revision information is tracked explicitly in the Hackage index, and `cabal-install` will chose to prefer the latest revision of a cabal file to the original one when downloading or installing a package.
 
 ## Why do we have revisions?
 
-Revisions are used to provide better metadata, typically in the case when a build-plan turns out to be incorrect, and we wish to tighten bounds to exclude incompatible versions of dependencies, or when a new version of a package is released and loosening dependencies will allow existing packages to work with it. Strategies for managing revisions and their costs are enumerated at: https://github.com/haskell-infra/hackage-trustees/blob/master/cookbook.md#best-practice-for-managing-meta-data
+Revisions are used to provide better metadata, typically in the case when a build-plan turns out to be incorrect, and we wish to tighten bounds to exclude incompatible versions of dependencies, or when a new version of a package is released and loosening dependencies will allow existing packages to work with it. Strategies for managing revisions and their costs are enumerated in [the hackage trustee cookbook](https://github.com/haskell-infra/hackage-trustees/blob/master/cookbook.md#best-practice-for-managing-meta-data)
 
 Revisions can also be used when a package homepage or maintainer or the like changes, to keep information displayed current.
 
@@ -16,7 +16,7 @@ First, uploading a whole bunch of code when only metadata changes leads to an un
 
 ## Where can I see revisions?
 
-Packages with revisions will tell you so on their cabal page. You can always access the revisions of a package by appending `/revisions` to its url, like so: http://hackage.haskell.org/package/lens-3.5.1/revisions/
+Packages with revisions will tell you so on their Hackage page. You can always access the revisions of a package by appending `/revisions` to its url, like so: http://hackage.haskell.org/package/lens-3.5.1/revisions/
 
 ## How can I download a package without revisions applied?
 
@@ -24,7 +24,7 @@ Packages with revisions will tell you so on their cabal page. You can always acc
 
 ## How can I fix dependencies in the face of potential future revisions?
 
-If you produced something at a particular point in time and want to pin it down so that no future revisions can alter anything about it, you can specify the `index-state` parameter (either in a configuration file or on the command line) as documented here: http://cabal.readthedocs.io/en/latest/nix-local-build.html?highlight=index-state#cfg-field-index-state
+If you produced something at a particular point in time and want to pin it down so that no future revisions can alter anything about it, you can specify the `index-state` parameter (either in a configuration file or on the command line) as documented in [the cabal manual: index-state configuration field](http://cabal.readthedocs.io/en/latest/nix-local-build.html?highlight=index-state#cfg-field-index-state)
 
 This pins down the view of the package universe to use revisions as of any particular timestamp and so allows you to `cabal freeze` not only versions, but the exact revisions of them.
 
@@ -56,7 +56,7 @@ Specifically, revisions can alter the following:
 * Package description
 * Package category
 
-Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while in older versions `Setup.hs` had access to whatever happened to be registered in the user pkg db. This was fragile and created a situation with untracked dependencies (cf: https://www.well-typed.com/blog/2015/07/cabal-setup-deps/)
+Revisions can also add custom-setup stanzas. This is necessary because newer cabal library versions make explicit custom-setup depends, while in older versions `Setup.hs` had access to whatever happened to be registered in the global and user package databases. This was fragile and created a situation with untracked dependencies (cf: https://www.well-typed.com/blog/2015/07/cabal-setup-deps/)
 
 Other exceptions for adding dependencies all fall in the camp of needing to add things which had been implicitly assumed in the past, from a small whitelist. Package dependencies which may be added are "base" and "base-orphans". Build tool dependencies which may be added are "alex", "c2hs", "cpphs", "greencard", "happy" and "hsc2hs". This can be seen as improving compatibility with newer cabal library versions which require that past implicit assumptions be made more explicit (cf: https://www.well-typed.com/blog/2015/03/qualified-goals/).
 
