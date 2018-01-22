@@ -20,7 +20,7 @@ Packages with revisions will tell you so on their Hackage page. You can always a
 
 ## How can I download a package without revisions applied?
 
-`cabal get --pristine`
+`cabal get --pristine` or simply get `https://hackage.haskell.org/package/foo-1.6.0.0/foo-1.6.0.0.tar.gz`
 
 ## How can I fix dependencies in the face of potential future revisions?
 
