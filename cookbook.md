@@ -88,6 +88,22 @@ Could not deduce (Show a) arising from a use of ‘show’ from the context: Num
 
 **Problem**
 
+```
+    Could not find module ‘Control.Monad.Trans.Either’
+    Perhaps you meant
+      Control.Monad.Trans.Writer (from transformers-0.5.5.0)
+      Control.Monad.Trans.Writer (needs flag -package transformers-0.3.0.0)
+      Control.Monad.Trans.Writer (needs flag -package transformers-0.4.3.0)
+```
+
+**Metadata fix:** Add a `either < 5` constraint.
+
+**Explanation:** `Control.Monad.Trans.Either` was removed from `either` in `either-5`
+
+---
+
+**Problem**
+
 The `.cabal` file contains disabled components (i.e. via `buildable:False`) and the build fails with
 
 ```
