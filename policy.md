@@ -21,12 +21,35 @@ across numerous Linux distributions.
 
 ## Mission statement
 
-The goal is to maximise the useful improvements trustees can make (or
-encourage others to make) to the collection while making sure the
-relationship with authors/maintainers is healthy. We want processes (and
-if necessary automation) for each case that balances the ability of
-trustees to make useful improvements, with the legitimate concerns of
-authors/maintainers to maintain control and quality.
+The goal of the trustees is to make it easy for anyone to use packages
+that are hosted on Hackage, and maintain the overall health of Hackage
+infrastructure. Ideally users will always be able to find a suitable
+combination of packages and versions that work well together.
+
+Trustees strive to involve maintainers in this process as much as
+possible while being friendly, helpful, and respectful. In general,
+trustees aim to empower and educate maintainers about the tools at
+their disposal to better manage their own packages. We realize that
+not everyone shares our priorities and we do not want to take up
+anyone's time unnecessarily. For these cases we would like to find an
+arrangement that suits the maintainers wishes, while also not unduly
+burdening resources of trustees. Being a part of the hackage curation
+process is entirely optional.
+
+Trustee policies are intended to maximise the useful improvements
+trustees can make (or encourage others to make) to the collection
+while making sure the relationship with authors/maintainers is
+healthy. We do not want to discourage maintainers from using Hackage.
+We want processes (and if necessary automation) for each case that
+balances the ability of trustees to make useful improvements, with the
+legitimate concerns of authors/maintainers to maintain control and
+quality.
+
+Common trustee operations involve specifying or correcting metadata
+using revisions, but there are also uncommon operations involving
+uploads of new versions. The rest of this document contains details on
+which changes can be made in which circumstances, and with what
+necessary prior and subsequent communication.
 
 
 ## 1. Metadata-only changes: tightening constraints
@@ -50,7 +73,7 @@ work and so the trustees want a process with low overheads.
 * trustees can edit .cabal file to constrain dependencies
 * maintainers should be notified via e-mail, by filing a bug tracker issue, or
   by sending pull request (in the future this step may be automated by hackage)
- 
+
 ## 2. Metadata-only changes: relaxing constraints
 
 The trustees' view is that relaxing constraints should be done
@@ -69,7 +92,7 @@ Nevertheless there are cases where it is helpful.
 
 * (in the future) maintainers should be able to explicitly indicate
   whether trustees are able to relax constraints for their package
-  
+
 * (in the future) if not, trustee's proposed edits are sent to the
   maintainers but not applied
 
