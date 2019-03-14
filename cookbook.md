@@ -66,7 +66,7 @@ Could not deduce (Show a) arising from a use of ‘show’ from the context: Num
 
 **Metadata fix:** Add a `base < 4.5` constraint.
 
-**Explaination:** `Num` lost its Haskell2010-compliant `Eq`/`Show` superclasses in `base-4.5`
+**Explanation:** `Num` lost its Haskell2010-compliant `Eq`/`Show` superclasses in `base-4.5`
 
 ---
 
