@@ -155,8 +155,8 @@ author.
     record in the ticket when again tried to contact the
     maintainer(s). This documents the start of the 1-week deadline.
  5. (Anyone) Discuss exactly what code needs to be changed.
- 6. (Trustee) Fork the upstream repo under the hackage-trustee
-    organisation on github and prepare the patches (perhaps by
+ 6. (Trustee) Fork the upstream repo under the [hackage-trustee
+    organisation](https://github.com/hackage-trustees) on github and prepare the patches (perhaps by
     pulling in changes from somewhere else), including a tag.
  7. (Trustee) Get at least a second trustee to look at and agree to
     the changes for the proposed NMU.
