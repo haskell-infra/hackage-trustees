@@ -18,6 +18,11 @@ First, uploading a whole bunch of code when only metadata changes leads to an un
 
 Packages with revisions will tell you so on their Hackage page. You can always access the revisions of a package by appending `/revisions` to its url, like so: http://hackage.haskell.org/package/lens-3.5.1/revisions/
 
+## How can I revise a package?
+
+On the page of the package (`https://hackage.haskell.org/package/some-package-0.0.1`), you'll find the `Maintainer's Corner` with a link to `edit package information`. After clicking on that link and signing in with your hackage credentials, you can edit the cabal file,
+review changes, and upload the revision.
+
 ## How can I download a package without revisions applied?
 
 `cabal get --pristine` or simply get `https://hackage.haskell.org/package/foo-1.6.0.0/foo-1.6.0.0.tar.gz`
