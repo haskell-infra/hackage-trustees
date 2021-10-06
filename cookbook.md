@@ -136,6 +136,7 @@ Data.Bits.zeroBits                          => base >= 4.7
 Prelude.&                                   => base >= 4.8
 Control.Concurrent.forkFinally              => base >= 4.6
 atomicModifyIORef'                          => base >= 4.6
+CUInt                                       => base >= 4.5
 
 bytestring:
 Data.ByteString.Builder                     => bytestring >= 0.10.2
