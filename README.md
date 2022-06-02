@@ -8,4 +8,4 @@ The process for trustee operations is described in detail in [the policy documen
 
 For bugs and issues in the **software component `hackage-server`** please go to https://github.com/haskell/hackage-server instead.
 
-The trustees can also be contacted at [trustees@hackage.haskell.org](mailto:trustees@hackage.haskell.org)
+The trustees can also be contacted at [hackage-trustees@haskell.org](mailto:hackage-trustees@.haskell.org)
