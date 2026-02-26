@@ -9,3 +9,5 @@ The process for trustee operations is described in detail in [the policy documen
 For bugs and issues in the **software component `hackage-server`** please go to https://github.com/haskell/hackage-server instead.
 
 The trustees can also be contacted at [hackage-trustees@haskell.org](mailto:hackage-trustees@.haskell.org)
+
+Note that trustees have specific abilities to intervine as discussed in the above documentation. For other issues, such as package takeover requests or policy issues, one should contact the [Hackage administrators](https://hackage.haskell.org/users/admins/) at [hackage-admin@haskell.org](mailto:hackage-admin@haskell.org).
